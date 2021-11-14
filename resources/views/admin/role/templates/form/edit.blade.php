@@ -98,7 +98,7 @@
                                         {!! Form::hidden('permissions[' . $i . '][icon]', $permission->icon) !!}
 
 
-                                        <button type="button" class="btn btn-sm mb-3" data-toggle="collapse"
+                                        <button type="button" class="btn mb-3" data-toggle="collapse"
                                             aria-expanded="true" aria-controls="collapse-{{ $i }}"
                                             data-target="#collapse-{{ $i }}">
                                             <i class="{{ $permission->icon }}" aria-hidden="true"></i>

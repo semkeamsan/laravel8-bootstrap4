@@ -15,7 +15,7 @@
                     <div class="col-xl-6 mb-3">
                         {!! Form::label('name', __('Name'), ['class' => 'form-control-label']) !!}
                         <span class="text-danger text-xs"> * </span>
-                        {!! Form::text('name', null, ['class' => 'form-control', 'required' => true]) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'trigger', 'data-target' => '#show-name', 'data-text' => __('Name'), 'required' => true]) !!}
                         @error('name')
                             <div class="error-feedback d-block">
                                 {{ $message }}
@@ -163,7 +163,9 @@
                                     <i class="fal fa-user-shield"></i>
                                 </span>
                             </div>
-                            <select class="form-control" data-toggle="select" data-live-search="true" name="role_id"
+
+                            <select class="form-control" data-toggle="select" trigger data-target="#show-role"
+                                data-text="{{ __('Role') }}" data-live-search="true" name="role_id"
                                 data-live-search-placeholder="{{ __('Search') }}" required>
                                 @foreach ($roles as $role)
                                     <option {{ old('role_id') ? 'selected=selected' : null }}

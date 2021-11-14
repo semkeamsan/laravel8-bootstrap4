@@ -17,3 +17,7 @@ fieldset.collapsible>div {
 .modal-open .select2-container--open {
     z-index: 9999;
 }
+
+textarea {
+    min-height: 10rem !important;
+}

@@ -24,7 +24,7 @@ class AccountController extends Controller
         // }
         $update = auth()->user()->update(['email' => $request->email]);
 
-        return redirect(route('admin.account.index').'#email');
+        return  redirect()->back()->with('message', __('Email successfully'));
     }
     public function password(Request $request)
     {
@@ -34,11 +34,10 @@ class AccountController extends Controller
         $update = auth()->user()->update([
             'password' => Hash::make($request->new_password)
         ]);
-        return redirect(route('admin.account.index').'#password');
+        return  redirect()->back()->with('message', __('Password successfully'));
     }
     public function biography(Request $request)
     {
-
         $user =  auth()->user();
         $rules = $user->validation->rules(auth()->id());
         unset($rules['password']);
@@ -48,7 +47,7 @@ class AccountController extends Controller
         request()->merge(['dob' => new Carbon($request->dob)]);
         auth()->user()->update($request->all());
 
-        return redirect(route('admin.account.index').'#biography');
+        return  redirect()->back()->with('message', __('Biography successfully'));
     }
 
 }

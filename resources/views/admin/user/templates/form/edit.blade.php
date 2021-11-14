@@ -16,7 +16,7 @@
                     <div class="col-xl-6 mb-3">
                         {!! Form::label('name', __('Name'), ['class' => 'form-control-label']) !!}
                         <span class="text-danger text-xs"> * </span>
-                        {!! Form::text('name', $user->name, ['class' => 'form-control', 'required' => true]) !!}
+                        {!! Form::text('name', $user->name, ['class' => 'form-control', 'trigger','data-target' => '#show-name', 'data-text' => __('Name'), 'required' => true]) !!}
                         @error('name')
                             <div class="error-feedback d-block">
                                 {{ $message }}

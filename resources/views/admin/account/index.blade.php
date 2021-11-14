@@ -15,7 +15,7 @@
                                     <div class="form-group">
                                         {!! Form::label('name', __('Name'), ['class' => 'form-control-label']) !!}
                                         <span class="text-danger text-xs">*</span>
-                                        {!! Form::text('name', auth()->user()->name, ['class' => 'form-control', 'required' => true]) !!}
+                                        {!! Form::text('name', auth()->user()->name, ['class' => 'form-control','trigger','data-target' => '#show-name', 'data-text' => __('Name'), 'required' => true]) !!}
                                     </div>
 
                                 </div>
@@ -96,8 +96,8 @@
                             </div>
                         </div>
                         <div class="col-xl-4">
+                            {!! Form::label('avatar', __('Avatar'), ['class' => 'd-none']) !!}
                             {!! Form::hidden('avatar', old('avatar', auth()->user()->avatar), ['class' => 'custom-file-input']) !!}
-
                             <div class="card">
                                 <div class="card-body">
                                     <a href="#" id="image" data-target-input="#avatar" data-target-image="#im-avatar">
@@ -270,31 +270,13 @@
 
     </div>
 @endsection
-
-@push('styles-link')
-    <link href="{{ asset('vendor/semkeamsan/laravel-filemanager/filemanager/filemanager.css') }}" rel="stylesheet">
-@endpush
-
 @push('scripts-src')
     <script src="{{ asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('vendor/semkeamsan/laravel-filemanager/filemanager/filemanager.js') }}"></script>
-    @if (app()->getLocale() !== 'en')
-        <script src="{{ asset('vendor/bootstrap-datepicker/dist/locales/' . app()->getLocale() . '.js') }}">
-        </script>
-        <script src="{{ asset('vendor/semkeamsan/laravel-filemanager/filemanager/locales/' . app()->getLocale() . '.js') }}">
-        </script>
-    @endif
+    @filemanagerAssets
 @endpush
 @push('scripts')
     <script>
         var _token = $('meta[name="csrf-token"]').attr("content");
-        $('#name').on('input', function() {
-            if ($(this).val()) {
-                $('#show-name').text($(this).val());
-            } else {
-                $('#show-name').text("{{ __('Name') }}");
-            }
-        });
         $(`#image`).filemanager({
             url: `filemanager`,
             _token: _token,
