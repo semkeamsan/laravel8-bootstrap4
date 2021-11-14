@@ -22,18 +22,18 @@
 </head>
 <body class="{{ config('page.device') == 'mobile' ?'g-sidenav-hidden' : (@$_COOKIE['sidenav-state'] == 'unpinned' ? 'g-sidenav-hidden' : 'g-sidenav-show g-sidenav-pinned') }}">
     <div id="app">
-        @include('admin.nav.left')
+        @include('admin.navbar.left')
         <!-- Main content -->
         <div class="main-content" id="panel">
             <!-- Topnav -->
-            @include('admin.nav.top')
+            @include('admin.navbar.top')
             <!-- Header -->
-            @include('admin.nav.header')
+            @include('admin.navbar.header')
             <!-- Page content -->
             <div class="container-fluid mt--6">
                 @yield('content')
                 <!-- Footer -->
-                @include('admin.nav.footer')
+                @include('admin.navbar.footer')
             </div>
         </div>
     </div>
