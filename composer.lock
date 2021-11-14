@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc1450e6bd51a41d6100841e84ea0c58",
+    "content-hash": "18bc010439ded2522db859a97c5ddd97",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2983,19 +2983,24 @@
         {
             "name": "semkeamsan/laravel-filemanager",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/semkeamsan/laravel-filemanager.git",
+                "reference": "d1c21ea9ecb37cad2f21211e70e591a16d574288"
+            },
             "dist": {
-                "type": "path",
-                "url": "./packages/semkeamsan/laravel-filemanager",
-                "reference": "0c990cd42a45ce65e71cb62f219d13b10eb7b8d3"
+                "type": "zip",
+                "url": "https://api.github.com/repos/semkeamsan/laravel-filemanager/zipball/d1c21ea9ecb37cad2f21211e70e591a16d574288",
+                "reference": "d1c21ea9ecb37cad2f21211e70e591a16d574288",
+                "shasum": ""
             },
             "require": {
                 "illuminate/http": "^6.0|^7.0|^8.0",
                 "illuminate/routing": "^6.0|^7.0|^8.0",
-                "illuminate/session": "^6.0|^7.0|^8.0",
-                "illuminate/support": "^6.0|^7.0|^8.0",
                 "illuminate/view": "^6.0|^7.0|^8.0",
                 "php": ">=7.2.5"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -3009,11 +3014,7 @@
                     "Semkeamsan\\LaravelFilemanager\\": "src/"
                 }
             },
-            "scripts": {
-                "post-update-cmd": [
-                    "@php artisan vendor:publish --tag=semkeamsan/laravel-filemanager-public"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3024,9 +3025,11 @@
                 }
             ],
             "description": "Laravel Package laravel-filemanager",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/semkeamsan/laravel-filemanager/issues",
+                "source": "https://github.com/semkeamsan/laravel-filemanager/tree/main"
+            },
+            "time": "2021-11-14T06:25:30+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
