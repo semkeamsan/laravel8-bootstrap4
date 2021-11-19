@@ -29,39 +29,33 @@
         <div class="form-row">
             <div class="col-6">
                 <div class="form-row">
-                    @foreach (config('languages') as $language)
-                        <div class="col-md-6 mb-3">
-                            {!! Form::label($language['code'], $language['name'], ['class' => 'form-control-label']) !!}
-                            <span class="text-danger text-xs"> * </span>
+                    <div class="col-md-12 mb-3">
+                        {!! Form::label('name', __('Name'), ['class' => 'form-control-label']) !!}
+                        <span class="text-danger text-xs"> * </span>
 
-                            <div class="input-group">
-                                {!! Form::text($language['code'], $role->{$language['code']}, ['class' => 'form-control', 'required' => true]) !!}
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <img src="{{ asset('images/flags/' . $language['code'] . '.svg') }}"
-                                            width="20px">
-                                    </span>
-                                </div>
-                                @error($language['code'])
-                                    <div class="error-feedback d-block">
-                                        {{ $message }}
-                                    </div>
-                                @else
-                                    <div class="invalid-feedback">
-                                        {{ __('validation.required', ['attribute' => $language['name']]) }}
-                                    </div>
-                                @enderror
+                        <div class="input-group">
+                            {!! Form::text('name', $role->translation()->name, ['class' => 'form-control', 'required' => true]) !!}
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <img src="{{ asset('images/flags/' . app()->getlocale() . '.svg') }}" width="20px">
+                                </span>
                             </div>
-
-
+                            @error('name')
+                                <div class="error-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @else
+                                <div class="invalid-feedback">
+                                    {{ __('validation.required', ['attribute' => __('Name')]) }}
+                                </div>
+                            @enderror
                         </div>
-                    @endforeach
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
                         {!! Form::label('description', __('Description'), ['class' => 'form-control-label']) !!}
-                        {!! Form::textarea('description', $role->description, ['class' => 'form-control']) !!}
-
+                        {!! Form::textarea('description', $role->translation()->description, ['class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
@@ -105,21 +99,24 @@
                                             {{ $permission->km }} - {{ $permission->en }}
                                         </button>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"  {{ $has->count() && $has->first()->navbar ? 'checked' : null }}
-                                             id="ck-navbar-{{ $i }}" name="permissions[{{ $i }}][navbar]" value="1">
+                                            <input type="checkbox" class="custom-control-input"
+                                                {{ $has->count() && $has->first()->navbar ? 'checked' : null }}
+                                                id="ck-navbar-{{ $i }}"
+                                                name="permissions[{{ $i }}][navbar]" value="1">
                                             <label class="custom-control-label"
                                                 for="ck-navbar-{{ $i }}">{{ __('Navbar') }}</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"  {{ $has->count() && $has->first()->underline ? 'checked' : null }}
-                                             id="ck-underline-{{ $i }}" name="permissions[{{ $i }}][underline]" value="1">
+                                            <input type="checkbox" class="custom-control-input"
+                                                {{ $has->count() && $has->first()->underline ? 'checked' : null }}
+                                                id="ck-underline-{{ $i }}"
+                                                name="permissions[{{ $i }}][underline]" value="1">
                                             <label class="custom-control-label"
                                                 for="ck-underline-{{ $i }}">{{ __('Underline') }}</label>
                                         </div>
 
                                     </td>
                                     <td>
-
                                         <div class="collapse {{ $loop->first ? 'show' : 'show' }}"
                                             id="collapse-{{ $i }}">
 
@@ -127,15 +124,21 @@
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
                                                         <input
-                                                            {{ $has->count() && $has->first()->routes->count() >= 5 ? 'checked' : null }}
+                                                            {{ $has->count() && $has->first()->routes->count() >= $permission->routes->count() ? 'checked' : null }}
                                                             type="checkbox" class="custom-control-input"
                                                             data-toggle="ck-group" id="ck-{{ $i }}">
                                                         <label class="custom-control-label"
                                                             for="ck-{{ $i }}">{{ __('All') }}</label>
                                                     </div>
-
+                                                    @php
+                                                        $routes = $permission->routes
+                                                            ->union($has->count() ? $has->first()->routes : [])
+                                                            //->merge(['index', 'create-store', 'edit-update', 'show', 'destroy'])
+                                                            ->unique();
+                                                    @endphp
                                                     <ul class="navbar-brand">
-                                                        @foreach ($permission->routes->union($has->count() ? $has->first()->routes : collect())->union(['index', 'create-store', 'edit-update', 'show', 'destroy']) as $route)
+                                                        @foreach ($routes as $route)
+
                                                             <li>
                                                                 <div class="custom-control custom-checkbox">
                                                                     <input
@@ -149,6 +152,8 @@
                                                                         for="ck-{{ $i }}-{{ $route }}">{{ __($route) }}</label>
                                                                 </div>
                                                             </li>
+
+
                                                         @endforeach
                                                         <li data-toggle="route-add"
                                                             data-name="permissions[{{ $i }}][routes][]"

@@ -34,7 +34,7 @@
                                             @foreach ($roles as $role)
                                                 <option {{ $role->slug != request('role') ?: 'selected=selected' }}
                                                     value="{{ $role->slug }}">
-                                                    {{ $role->km }} - {{ $role->en }}
+                                                    {{ $role->translation()->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -48,7 +48,7 @@
                                                 <option
                                                     {{ $permission->slug != request('permission') ?: 'selected=selected' }}
                                                     value="{{ $permission->slug }}">
-                                                    {{ $permission->km }} - {{ $permission->en }}
+                                                    {{ $permission->translation()->name }}
                                                 </option>
                                             @endforeach
 

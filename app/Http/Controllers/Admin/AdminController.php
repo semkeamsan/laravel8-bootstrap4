@@ -9,7 +9,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-
         return $this->dashboard();
     }
     public function dashboard()

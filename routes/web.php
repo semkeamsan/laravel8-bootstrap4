@@ -15,11 +15,10 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Front\\FrontController@index')->name('front.index');
+Route::get('/home', 'Front\\FrontController@home')->name('front.home');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::prefix('language')->as('language.')->group(function () {
     Route::match(['get', 'post'], 'set/{locale}', function ($locale) {
         Session::put('locale', $locale);
@@ -32,4 +31,3 @@ Route::prefix('language')->as('language.')->group(function () {
         }
     })->name('set');
 });
-

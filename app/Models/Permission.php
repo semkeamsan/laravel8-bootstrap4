@@ -17,16 +17,20 @@ class Permission extends Model
         $this->fillable = Schema::getColumnListing($this->getTable());
         parent::__construct($attributes);
     }
-    public static function boot()
+    public function translations()
     {
-        parent::boot();
-        self::creating(function ($model) {
-            //$model->created_by = auth()->id();
-            $model->updated_at = null;
-        });
-        self::updating(function ($model) {
-            //$model->updated_by = auth()->id();
-        });
+        return $this->hasMany(PermissionTranslation::class);
+    }
+    public function translation($locale = null)
+    {
+        if ($locale == null) {
+            $locale = app()->getLocale();
+        }
+        $translation = $this->translations->where('locale', $locale);
+        if ($translation->count()) {
+            return $translation->first();
+        }
+        return new PermissionTranslation;
     }
     public function role()
     {

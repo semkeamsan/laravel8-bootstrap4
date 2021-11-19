@@ -22,7 +22,7 @@ $collection = $collection->when(request('permission'))->where('slug', request('p
                     <td>{{ $key + 1 }}</td>
                     <td>
                         <i class="{{ $row->icon }}"></i>
-                        {{ $row->km }} - {{ $row->en }}
+                        {{ $row->translation()->name }}
                     </td>
                     <td class="form-row">
                         @foreach ($row->routes as $route)

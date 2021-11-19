@@ -14,6 +14,9 @@
                         </div>
                     </div>
                 </li>
+
+            </ul>
+            <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                 <li class="nav-item text-nowrap dropdown">
                     <a href="#" class="nav-link" data-toggle="dropdown" id="navbar-languages">
                         <span>
@@ -23,7 +26,7 @@
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-languages">
                         @foreach (config('languages', []) as $lang)
                             <li>
-                                <a class="dropdown-item" href="{{ route('language.set', $lang['code']) }}">
+                                <a class="dropdown-item {{  $lang['code'] == app()->getLocale()? 'active' : null }}" href="{{ route('language.set', $lang['code']) }}">
                                     <span><img width="26"
                                             src="{{ asset('images/flags/' . $lang['code'] . '.svg') }}" /></span>
                                     <span>{{ $lang['name'] }}</span>
@@ -32,8 +35,6 @@
                         @endforeach
                     </ul>
                 </li>
-            </ul>
-            <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                 <li class="nav-item dropdown">
                     <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -51,7 +52,9 @@
                             <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                         </div>
                         @if (auth()->user()->role->permissions->where('slug', 'account')->count())
-                            <a href="{{ route('admin.account.index') }}" class="dropdown-item {{ auth()->user()->role->permissions->where('slug','account')->first()->routes->contains('index') ?:'d-none' }}">
+                            <a href="{{ route('admin.account.index') }}"
+                                class="dropdown-item {{ auth()->user()->role->permissions->where('slug', 'account')->first()->routes->contains('index') ?:
+                                    'd-none' }}">
                                 <i class="fal fa-user"></i>
                                 <span>{{ __('My account') }}</span>
                             </a>

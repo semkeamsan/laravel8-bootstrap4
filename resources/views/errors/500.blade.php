@@ -1,5 +1,13 @@
-@extends('errors::minimal')
+@extends('layouts.app')
+@section('content')
+    <div class="error">
+        <div class="code">
+            <h1>500</h1>
+        </div>
+        <h2> {{ __('Server Error') }}</h2>
 
-@section('title', __('Server Error'))
-@section('code', '500')
-@section('message', __('Server Error'))
+    </div>
+@endsection
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/error.css') }}">
+@endpush

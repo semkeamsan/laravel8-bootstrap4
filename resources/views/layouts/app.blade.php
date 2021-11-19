@@ -12,28 +12,32 @@
     <link rel="stylesheet" href="{{ asset('vendor/@fontawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
+    @stack('styles')
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm p-2">
+        <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand d-block" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <!-- Navbar links -->
+                    <ul class="navbar-nav align-items-center  ml-md-auto ">
+                        <li class="nav-item d-none">
+                            <!-- Sidenav toggler -->
+                            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                                data-target="#sidenav-main">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav align-items-center ml-auto ml-md-0 ">
                         <li class="nav-item text-nowrap dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown" id="navbar-languages">
                                 <span>
@@ -44,7 +48,7 @@
                             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-languages">
                                 @foreach (config('languages', []) as $lang)
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('language.set', $lang['code']) }}">
+                                        <a class="dropdown-item {{  $lang['code'] == app()->getLocale()? 'active' : null }}" href="{{ route('language.set', $lang['code']) }}">
                                             <span><img width="26"
                                                     src="{{ asset('images/flags/' . $lang['code'] . '.svg') }}" /></span>
                                             <span>{{ $lang['name'] }}</span>
@@ -69,20 +73,23 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <i class="fal fa-tv"></i>
+                                        {{ __('Dashboard') }}
                                     </a>
+                                    <div class="dropdown-divider"></div>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
+                                    {!! Form::open(['url' => route('logout')]) !!}
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fal fa-sign-out-alt"></i>
+                                        <span>{{ __('Logout') }}</span>
+                                    </button>
+                                    {!! Form::close() !!}
                                 </div>
                             </li>
                         @endguest
@@ -101,8 +108,7 @@
     {{-- Custom Scripts --}}
     <script src="{{ asset('js/custom.js') }}"></script>
     {{-- custom --}}
-
+    @stack('scripts')
 </body>
-
 
 </html>

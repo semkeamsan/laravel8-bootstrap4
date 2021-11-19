@@ -56,6 +56,7 @@ class RoleController extends Controller
         $validate = $request->validate($role->validation->rules(), $role->validation->messages(), $role->validation->attributes());
         request()->merge(['slug' => Str::lower($request->slug)]);
         $role = $role->create($request->all());
+        $role->translations()->create(request()->all());
         $i = 1;
         foreach ($request->permissions as $key => $permission) {
             $permission['index'] = $i;
@@ -99,6 +100,7 @@ class RoleController extends Controller
         $validate = $request->validate($role->validation->rules($role->id), $role->validation->messages(), $role->validation->attributes());
         request()->merge(['slug' => Str::lower($request->slug)]);
         $role->update($request->all());
+        $role->translations()->updateOrCreate(['locale' => app()->getLocale()], request()->all());
         $permissions = [];
 
         foreach ($request->permissions as $key => $permission) {

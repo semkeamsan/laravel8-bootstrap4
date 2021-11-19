@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
 
-        Permission::insert([
+        $data = [
             [
                 'role_id' => 1,
                 'en'    => 'Permissions',
@@ -61,6 +61,23 @@ class PermissionSeeder extends Seeder
                 'created_at'  => now(),
                 'icon' => 'fal fa-user',
             ],
-        ]);
+        ];
+
+        foreach ($data as  $value) {
+            $role =  Permission::create([
+                'role_id' => $value['role_id'],
+                'routes' => $value['routes'],
+                'slug' => $value['slug'],
+                'icon' => $value['icon'],
+            ]);
+            $role->translations()->create([
+                'locale'  => 'en',
+                'name'    => $value['en'],
+            ]);
+            $role->translations()->create([
+                'locale'  => 'km',
+                'name'    => $value['km'],
+            ]);
+        }
     }
 }

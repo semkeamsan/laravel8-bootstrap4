@@ -11,7 +11,7 @@
             <tr>
                 <td>{{ $row->id }}</td>
                 <td>
-                    <a href="#">{{ $row->{app()->getLocale()} }}</a>
+                    <a href="#">{{ $row->translation()->name }}</a>
                 </td>
                 <td>
                     @include('admin.permission.templates.children',['collection' => $row->permissions])

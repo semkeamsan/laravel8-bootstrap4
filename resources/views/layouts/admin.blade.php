@@ -19,6 +19,9 @@
     {{-- Custom Styles --}}
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css">
     @stack('styles')
+    <script>
+        window.languages = {!! collect(Lang::get('*')) !!};
+    </script>
 </head>
 <body class="{{ config('page.device') == 'mobile' ?'g-sidenav-hidden' : (@$_COOKIE['sidenav-state'] == 'unpinned' ? 'g-sidenav-hidden' : 'g-sidenav-show g-sidenav-pinned') }}">
     <div id="app">
@@ -75,6 +78,7 @@
             });
         </script>
     @endif
+
 </body>
 
 </html>

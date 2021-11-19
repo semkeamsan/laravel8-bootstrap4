@@ -16,14 +16,14 @@
             <tr>
                 <td>{{ $row->id }}</td>
                 <td>
-                    {{ $row->km }} - {{ $row->en }}
+                    {{ $row->translation()->name }}
                 </td>
                 <td class="form-row">
                     @foreach ($row->permissions as $permission)
                         <div class="col-auto mb-2">
                             <a href="#" class="badge badge-lg badge-pill badge-primary">
                                 <i class="{{ $permission->icon }}"></i>
-                                {{ $permission->{app()->getLocale()} }}
+                                {{ $permission->translation()->name }}
                             </a>
                         </div>
                     @endforeach

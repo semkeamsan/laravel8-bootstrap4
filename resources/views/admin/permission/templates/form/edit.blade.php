@@ -24,7 +24,7 @@
                         @foreach ($roles as $role)
                             <option {{ $role->id != $permission->role_id ?: 'selected=selected' }}
                                 value="{{ $role->id }}">
-                                {{ $role->km }} - {{ $role->en }}
+                                {{ $role->translation()->name }}
                             </option>
                         @endforeach
                     </select>
@@ -43,31 +43,28 @@
         <div class="form-row">
             <div class="col-6">
                 <div class="form-row">
-                    @foreach (config('languages') as $language)
-                        <div class="col-md-6 mb-3">
-                            {!! Form::label($language['code'], $language['name'], ['class' => 'form-control-label']) !!}
-                            <span class="text-danger text-xs"> * </span>
+                    <div class="col-md-12 mb-3">
+                        {!! Form::label('name', __('Name'), ['class' => 'form-control-label']) !!}
+                        <span class="text-danger text-xs"> * </span>
 
-                            <div class="input-group">
-                                {!! Form::text($language['code'], $permission->{$language['code']}, ['class' => 'form-control', 'required' => true]) !!}
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <img src="{{ asset('images/flags/' . $language['code'] . '.svg') }}"
-                                            width="20px">
-                                    </span>
-                                </div>
-                                @error($language['code'])
-                                    <div class="error-feedback d-block">
-                                        {{ $message }}
-                                    </div>
-                                @else
-                                    <div class="invalid-feedback">
-                                        {{ __('validation.required', ['attribute' => $language['name']]) }}
-                                    </div>
-                                @enderror
+                        <div class="input-group">
+                            {!! Form::text('name', $permission->translation()->name, ['class' => 'form-control', 'required' => true]) !!}
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <img src="{{ asset('images/flags/' . app()->getlocale() . '.svg') }}" width="20px">
+                                </span>
                             </div>
+                            @error('name')
+                                <div class="error-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @else
+                                <div class="invalid-feedback">
+                                    {{ __('validation.required', ['attribute' => __('Name')]) }}
+                                </div>
+                            @enderror
                         </div>
-                    @endforeach
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">

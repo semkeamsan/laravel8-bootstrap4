@@ -4112,8 +4112,8 @@ input[type=submit].btn-block {
 .dropdown-item.active,
 .dropdown-item:active {
     text-decoration: none;
-    color: #16181b;
-    background-color: transparent
+    color: var(--white);
+    background-color: var(--primary)
 }
 
 .dropdown-item.disabled,

@@ -33,7 +33,7 @@
                                             @foreach ($roles as $role)
                                                 <option {{ $role->slug != request('role') ?: 'selected=selected' }}
                                                     value="{{ $role->slug }}">
-                                                    {{ $role->km }} - {{ $role->en }}
+                                                    {{ $role->translation()->name }}
                                                 </option>
                                             @endforeach
                                         </select>

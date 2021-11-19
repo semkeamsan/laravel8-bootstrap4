@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use App\Http\Requests\RoleFormRequest;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
@@ -11,26 +10,31 @@ class Role extends Model
 {
     use HasFactory;
     public $validation;
-    public function __construct(array $attributes = []) {
+    public function __construct(array $attributes = [])
+    {
         $this->validation = new RoleFormRequest;
         $this->fillable = Schema::getColumnListing($this->getTable());
         parent::__construct($attributes);
     }
-    public static function boot()
+
+    public function translations()
     {
-        parent::boot();
-        self::creating(function ($model) {
-            //$model->created_by = auth()->id();
-            $model->updated_at = null;
-        });
-        self::updating(function ($model) {
-           // $model->updated_by = auth()->id();
-        });
+        return $this->hasMany(RoleTranslation::class);
+    }
+    public function translation($locale = null)
+    {
+        if ($locale == null) {
+            $locale = app()->getLocale();
+        }
+        $translation = $this->translations->where('locale', $locale);
+        if ($translation->count()) {
+            return $translation->first();
+        }
+        return new RoleTranslation;
     }
 
     public function permissions()
     {
-        return $this->hasMany(Permission::class,'role_id')->orderBy('index');
+        return $this->hasMany(Permission::class, 'role_id')->orderBy('index');
     }
-
 }

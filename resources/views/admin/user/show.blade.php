@@ -1,4 +1,11 @@
 @extends('layouts.admin')
+@push('styles')
+    <style>
+        .form-control[readonly]{
+            background: transparent;
+        }
+    </style>
+@endpush
 
 @section('content')
     <div class="row">
@@ -10,171 +17,138 @@
                         <h3 class="mb-0">{{ __('View') }}</h3>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-5 mb-3">
-                                <div class="sticky-top">
-                                    <div class="timeline timeline-one-side" data-timeline-content="axis"
-                                        data-timeline-axis-style="dashed">
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="avatar avatar-xl rounded-circle">
-                                                        <img src="{{ $user->avatar }}" alt="{{ $user->name }}"
-                                                            class="w-100">
-                                                    </div>
-                                                </div>
+                        <div class="form-row">
+                            <div class="col-xl-8">
+                                <div class="form-row">
+                                    <div class="col-xl-6 mb-3">
+                                        {!! Form::label('name', __('Name'), ['class' => 'form-control-label']) !!}
+                                        <span class="text-danger text-xs"> * </span>
+                                        {!! Form::text('name', $user->name, ['readonly', 'class' => 'form-control', 'trigger', 'data-target' => '#show-name', 'data-text' => __('Name'), 'required' => true]) !!}
+                                        @error('name')
+                                            <div class="error-feedback d-block">
+                                                {{ $message }}
                                             </div>
-                                        </div>
-
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Id') }} : </span>
-                                                        {{ $user->id }}
-                                                    </div>
-                                                </div>
+                                        @else
+                                            <div class="invalid-feedback">
+                                                {{ __('validation.required', ['attribute' => __('Name')]) }}
                                             </div>
-                                        </div>
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
+                                        @enderror
+                                    </div>
 
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Name') }} : </span>
-                                                        {{ $user->name }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
+                                    <div class="col-xl-12">
+                                        <div class="form-row">
+                                            <div class="col-xl-4 mb-3">
+                                                {!! Form::label('dob', __('Date of Birth'), ['class' => 'form-control-label']) !!}
+                                                <span class="text-danger text-xs"> * </span>
 
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Gender') }} : </span>
-                                                        {{ __(Str::title($user->gender)) }}
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fal fa-calendar-alt"></i>
+                                                        </span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('About me') }} : </span>
-                                                        {{ $user->about }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Facbook') }} : </span>
-                                                        {{ $user->facebook }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-                                                <i class="fab fa-telegram"></i>
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Telegram') }} : </span>
-                                                        {{ $user->telegram }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-                                                <i class="fab fa-twitter"></i>
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Twitter') }} : </span>
-                                                        {{ $user->twitter }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="text-sm font-weight-bold">
-                                                        <span class="text-muted">{{ __('Linkedin') }} : </span>
-                                                        {{ $user->linkedin }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="d-flex justify-content-between pt-1">
-                                                        <div class="text-sm font-weight-bold">
-                                                            <span class="text-muted">{{ __('Created at') }} : </span>
-                                                            {{ $user->created_at ? $user->created_at->diffForHumans() : null }}
+                                                    {!! Form::text('dob', $user->dob ? $user->dob->format('d-m-Y') : null, ['readonly','class' => 'form-control', 'required' => true]) !!}
+                                                    @error('dob')
+                                                        <div class="error-feedback d-block">
+                                                            {{ $message }}
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="timeline-block">
-                                            <span class="timeline-step badge-primary">
-
-                                            </span>
-                                            <div class="timeline-content">
-                                                <div class="d-flex justify-content-between pt-1">
-                                                    <div class="d-flex justify-content-between pt-1">
-                                                        <div class="text-sm font-weight-bold">
-                                                            <span class="text-muted">{{ __('Updated at') }} : </span>
-                                                            {{ $user->updated_at ? $user->updated_at->diffForHumans() : null }}
+                                                    @else
+                                                        <div class="invalid-feedback">
+                                                            {{ __('validation.required', ['attribute' => __('Date of Birth')]) }}
                                                         </div>
-                                                    </div>
+                                                    @enderror
                                                 </div>
+
+                                            </div>
+                                            <div class="col-xl-4 mb-3">
+                                                {!! Form::label('phone', __('Phone'), ['class' => 'form-control-label']) !!}
+                                                <span class="text-danger text-xs"> * </span>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fal fa-phone"></i>
+                                                        </span>
+                                                    </div>
+                                                    {!! Form::text('phone', $user->phone, ['readonly','class' => 'form-control', 'required' => true]) !!}
+                                                    @error('phone')
+                                                        <div class="error-feedback d-block">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @else
+                                                        <div class="invalid-feedback">
+                                                            {{ __('validation.required', ['attribute' => __('Phone')]) }}
+                                                        </div>
+                                                    @enderror
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-4 mb-3">
+                                                {!! Form::label('email', __('Email'), ['class' => 'form-control-label']) !!}
+                                                <span class="text-danger text-xs"> * </span>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fal fa-envelope"></i>
+                                                        </span>
+                                                    </div>
+                                                    {!! Form::email('email', $user->email, ['readonly','class' => 'form-control', 'required' => true]) !!}
+                                                    @error('email')
+                                                        <div class="error-feedback d-block">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @else
+                                                        <div class="invalid-feedback">
+                                                            {{ __('validation.required', ['attribute' => __('Email')]) }}
+                                                        </div>
+                                                    @enderror
+
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                            <div class="col-xl-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a href="#">
+                                            <img src="{{ $user->avatar }}"
+                                                class="rounded-circle img-center img-fluid shadow shadow-lg--hover"
+                                                style="height: 140px;width: 140px;">
+                                        </a>
+                                        <div class="pt-4 text-center">
+                                            <h5 class="h3 title">
+                                                <span class="d-block mb-1" id="show-name">{{ $user->name }}</span>
+                                                <span class="d-block mb-1 text-muted">{{ __(Str::title( $user->gender)) }}</span>
+                                                <small class="h4 font-weight-light text-muted"
+                                                    id="show-role">{{ $user->role->{app()->getLocale()} }}
+                                                </small>
 
+                                            </h5>
+                                            <div class="mt-3">
+
+                                                <a href="#" class="btn border btn-icon-only rounded-circle">
+                                                    <i class="fab fa-facebook"></i>
+                                                </a>
+                                                <a href="#" class="btn border btn-icon-only rounded-circle">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                                <a href="#" class="btn border btn-icon-only rounded-circle">
+                                                    <i class="fab fa-telegram"></i>
+                                                </a>
+                                                <a href="#" class="btn border btn-icon-only rounded-circle">
+                                                    <i class="fab fa-linkedin"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
                     </div>
                     <div class="card-footer">
                         <a class="btn" href="{{ route('admin.user.index') }}">{{ __('Back') }}</a>

@@ -8,4 +8,12 @@ return [
         'name'  => 'English',
         'code'  => 'en',
     ],
+    // 'cn'    => [
+    //     'name'  => '中国人',
+    //     'code'  => 'cn',
+    // ],
+    // 'th'    => [
+    //     'name'  => 'ไทย',
+    //     'code'  => 'th',
+    // ],
 ];

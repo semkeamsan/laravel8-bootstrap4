@@ -66,7 +66,8 @@ class PermissionController extends Controller
     {
         request()->merge(['routes' => explode(',', $request->routes)]);
         $validate = $request->validate($permission->validation->rules(), $permission->validation->messages(), $permission->validation->attributes());
-        $permission->create($request->all());
+        $permission = $permission->create($request->all());
+        $permission->translations()->create(request()->all());
         return  redirect()->back()->with('message', __('Add successfully'));
     }
 
@@ -104,6 +105,7 @@ class PermissionController extends Controller
         request()->merge(['routes' => explode(',', $request->routes)]);
         $validate = $request->validate($permission->validation->rules($permission->id), $permission->validation->messages(), $permission->validation->attributes());
         $permission->update($request->all());
+        $permission->translations()->updateOrCreate(['locale' => app()->getLocale()], request()->all());
         return  redirect()->back()->with('message', __('Edit successfully'));
     }
 

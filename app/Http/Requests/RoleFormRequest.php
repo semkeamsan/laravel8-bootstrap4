@@ -25,12 +25,9 @@ class RoleFormRequest extends FormRequest
     public function rules($id = null)
     {
         $rules = [
+            'name'     => 'required',
             'slug'     => 'required|unique:roles,slug,' . $id,
         ];
-        foreach (config('languages') as $key => $value) {
-            $rules[$key] = 'required';
-        }
-
         return $rules;
     }
     public function attributes()

@@ -24,6 +24,7 @@ class Permissions
         config()->set('page.prefix', $prefix);
         config()->set('page.slug', $routes[1]);
         config()->set('page.route', $routes->last());
+        request()->merge(['locale' => app()->getLocale()]);
         $permission =  auth()->user()->role->permissions->where('slug', $routes[1])->first();
         $breadcrumbs = collect([
             [
@@ -36,14 +37,14 @@ class Permissions
             config()->set('page.permissions', $permission->routes);
             $breadcrumbs = collect([
                 [
-                    'title'  => $permission->{app()->getLocale()},
-                    'link'   => route($prefix.'.' . $permission->slug . '.index'),
+                    'title'  => $permission->translation()->name,
+                    'link'   => route($prefix . '.' . $permission->slug . '.index'),
                 ]
             ]);
             $route = $routes->last();
-            if($route == 'create' || $route == 'store'){
+            if ($route == 'create' || $route == 'store') {
                 $route = 'create-store';
-            }elseif($route == 'edit' || $route == 'update'){
+            } elseif ($route == 'edit' || $route == 'update') {
                 $route = 'edit-update';
             }
             if ($permission->routes->contains($route)) {

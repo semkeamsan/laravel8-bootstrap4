@@ -28,10 +28,9 @@ class PermissionFormRequest extends FormRequest
             'slug'     => 'required|unique:roles,slug,' . $id,
             'routes'     => 'required',
             'role_id'     => 'required',
+            'name'     => 'required',
         ];
-        foreach (config('languages') as $key => $value) {
-            $rules[$key] = 'required';
-        }
+
 
         return $rules;
     }

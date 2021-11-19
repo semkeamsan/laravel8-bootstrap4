@@ -1,5 +1,13 @@
-@extends('errors::minimal')
+@extends('layouts.app')
+@section('content')
+    <div class="error">
+        <div class="code">
+            <h1>401</h1>
+        </div>
+        <h2> {{ __('Unauthorized') }}</h2>
 
-@section('title', __('Unauthorized'))
-@section('code', '401')
-@section('message', __('Unauthorized'))
+    </div>
+@endsection
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/error.css') }}">
+@endpush

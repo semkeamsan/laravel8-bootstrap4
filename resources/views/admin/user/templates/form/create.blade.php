@@ -32,7 +32,7 @@
                             <div class="col-xl-4 mb-3">
                                 {!! Form::label('gender', __('Gender'), ['class' => 'form-control-label']) !!}
                                 <span class="text-danger text-xs"> * </span>
-                                <div class="form-control">
+                                <div class="form-control h-auto">
                                     <div class="col-6 custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="male" value="male" name="gender"
                                             {{ old('gender') == 'male' ? 'checked' : null }}
