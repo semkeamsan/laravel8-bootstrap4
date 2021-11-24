@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UserSeeder::class,
         ]);
-        \App\Models\User::factory(50)->create();
+       // \App\Models\User::factory(50)->create();
     }
 }

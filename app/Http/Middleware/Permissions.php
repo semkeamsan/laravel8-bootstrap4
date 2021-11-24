@@ -25,6 +25,8 @@ class Permissions
         config()->set('page.slug', $routes[1]);
         config()->set('page.route', $routes->last());
         request()->merge(['locale' => app()->getLocale()]);
+
+
         $permission =  auth()->user()->role->permissions->where('slug', $routes[1])->first();
         $breadcrumbs = collect([
             [
@@ -33,6 +35,11 @@ class Permissions
             ]
         ]);
         config()->set('page.permissions', collect());
+
+        if ($routes['1'] == 'index' || $routes['1'] == 'dashboard') {
+            return $next($request);
+        }
+
         if ($permission) {
             config()->set('page.permissions', $permission->routes);
             $breadcrumbs = collect([

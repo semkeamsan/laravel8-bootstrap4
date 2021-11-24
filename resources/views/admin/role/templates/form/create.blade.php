@@ -77,17 +77,17 @@
                             @foreach ($permissions as $i => $permission)
                                 <tr class="bg-white w-100">
                                     <td>
-                                        @foreach (config('languages') as $lang)
-                                            {!! Form::hidden('permissions[' . $i . '][' . $lang['code'] . ']', $permission->{$lang['code']}) !!}
-                                        @endforeach
                                         {!! Form::hidden('permissions[' . $i . '][slug]', $permission->slug) !!}
                                         {!! Form::hidden('permissions[' . $i . '][icon]', $permission->icon) !!}
-
+                                        @foreach ($permission->translations()->get(['locale','name']) as $key => $translation)
+                                            {!! Form::hidden('permissions[' . $i . '][translations]['.$key.'][locale]', $translation->locale) !!}
+                                            {!! Form::hidden('permissions[' . $i . '][translations]['.$key.'][name]', $translation->name) !!}
+                                        @endforeach
                                         <button type="button" class="btn" data-toggle="collapse"
                                             aria-expanded="true" aria-controls="collapse-{{ $i }}"
                                             data-target="#collapse-{{ $i }}">
                                             <i class="{{ $permission->icon }}" aria-hidden="true"></i>
-                                            {{ $permission->km }} - {{ $permission->en }}
+                                            {{ $permission->translation()->name }}
                                         </button>
                                     </td>
                                     <td>

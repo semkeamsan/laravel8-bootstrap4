@@ -15,8 +15,6 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('en');
-            $table->string('km');
             $table->string('slug');
             $table->string('icon')->nullable();
             $table->json('routes');

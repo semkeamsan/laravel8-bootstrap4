@@ -53,6 +53,7 @@ class RoleController extends Controller
      */
     public function store(Request $request, Role $role)
     {
+
         $validate = $request->validate($role->validation->rules(), $role->validation->messages(), $role->validation->attributes());
         request()->merge(['slug' => Str::lower($request->slug)]);
         $role = $role->create($request->all());
@@ -60,10 +61,13 @@ class RoleController extends Controller
         $i = 1;
         foreach ($request->permissions as $key => $permission) {
             $permission['index'] = $i;
-            $role->permissions()->create($permission);
+            $p = $role->permissions()->create($permission);
+            foreach ($permission['translations'] as $translation) {
+                $p->translations()->create($translation);
+            }
             $i++;
         }
-        return  redirect()->back()->with('message',__('Add successfully'));
+        return  redirect()->back()->with('message', __('Add successfully'));
     }
 
     /**
@@ -104,23 +108,25 @@ class RoleController extends Controller
         $permissions = [];
 
         foreach ($request->permissions as $key => $permission) {
-            if(@$permission['routes']){
+            if (@$permission['routes']) {
                 $permissions[] = $permission;
             }
         }
-        $role->permissions()->whereNotIn('id',array_column($permissions,'id'))->delete();
+        $role->permissions()->whereNotIn('id', array_column($permissions, 'id'))->delete();
         $i = 1;
         foreach ($permissions as $key => $permission) {
-            if(@$permission['routes']){
+            if (@$permission['routes']) {
                 $permission['index'] = $i;
-                $permission['underline'] = @$permission['underline']??false;
-                $permission['navbar'] = @$permission['navbar']??false;
-                $role->permissions()->updateOrCreate(['id' => @$permission['id']], $permission);
+                $permission['underline'] = @$permission['underline'] ?? false;
+                $permission['navbar'] = @$permission['navbar'] ?? false;
+                $p =  $role->permissions()->updateOrCreate(['id' => @$permission['id']], $permission);
+                foreach ($permission['translations'] as $translation) {
+                    $p->translations()->updateOrCreate(['id' => @$translation['id']],$translation);
+                }
                 $i++;
             }
-
         }
-        return  redirect()->back()->with('message',__('Edit successfully'));
+        return  redirect()->back()->with('message', __('Edit successfully'));
     }
 
     /**
@@ -132,6 +138,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return  redirect()->back()->with('message',__('Delete successfully'));
+        return  redirect()->back()->with('message', __('Delete successfully'));
     }
 }

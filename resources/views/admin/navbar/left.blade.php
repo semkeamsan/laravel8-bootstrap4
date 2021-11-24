@@ -21,21 +21,21 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ strpos(Route::currentRouteName(), 'admin.index') === 0 || strpos(Route::currentRouteName(), 'admin.dashboard') === 0 ? 'active' : null }}"
-                            href="{{ route('admin.dashboard') }}">
+                        <a class="nav-link {{ strpos(Route::currentRouteName(), config('page.prefix').'.index') === 0 || strpos(Route::currentRouteName(), config('page.prefix').'.dashboard') === 0 ? 'active' : null }}"
+                            href="{{ route(config('page.prefix').'.dashboard') }}">
                             <i
-                                class="fal fa-tv {{ strpos(Route::currentRouteName(), 'admin.index') === 0 || strpos(Route::currentRouteName(), 'admin.dashboard') === 0 ? 'text-primary' : null }}"></i>
+                                class="fal fa-tv {{ strpos(Route::currentRouteName(), config('page.prefix').'.index') === 0 || strpos(Route::currentRouteName(), config('page.prefix').'.dashboard') === 0 ? 'text-primary' : null }}"></i>
                             <span class="nav-link-text">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
                 </ul>
                 <hr class="my-3">
                 @foreach (auth()->user()->role->permissions as $permission)
-                    @if (Route::has('admin.' . $permission->slug . '.index') && $permission->routes->contains('index') && $permission->navbar)
+                    @if (Route::has(config('page.prefix').'.' . $permission->slug . '.index') && $permission->routes->contains('index') && $permission->navbar)
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link {{ config('page.slug') == $permission->slug ? 'active' : null }}"
-                                    href="{{ route('admin.' . $permission->slug . '.index') }}">
+                                    href="{{ route(config('page.prefix').'.' . $permission->slug . '.index') }}">
                                     <i
                                         class="{{ $permission->icon }} {{ config('page.slug') == $permission->slug ? 'text-primary' : null }}"></i>
                                     <span class="nav-link-text">{{ $permission->translation()->name }}</span>

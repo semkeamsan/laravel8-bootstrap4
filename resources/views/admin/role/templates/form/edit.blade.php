@@ -85,18 +85,22 @@
                                 <tr class="bg-white w-100">
                                     <td>
                                         {!! Form::hidden('permissions[' . $i . '][id]', $has->count() ? $has->first()->id : null) !!}
-                                        @foreach (config('languages') as $lang)
-                                            {!! Form::hidden('permissions[' . $i . '][' . $lang['code'] . ']', $permission->{$lang['code']}) !!}
-                                        @endforeach
                                         {!! Form::hidden('permissions[' . $i . '][slug]', $permission->slug) !!}
                                         {!! Form::hidden('permissions[' . $i . '][icon]', $permission->icon) !!}
-
+                                        @php
+                                            $translations = $has->count() && $has->first()->translations->count() ? $has->first()->translations :$permission->translations()->get(['locale','name']);
+                                        @endphp
+                                        @foreach ($translations as $key => $translation)
+                                            {!! Form::hidden('permissions[' . $i . '][translations]['.$key.'][id]', $translation->id) !!}
+                                            {!! Form::hidden('permissions[' . $i . '][translations]['.$key.'][locale]', $translation->locale) !!}
+                                            {!! Form::hidden('permissions[' . $i . '][translations]['.$key.'][name]', $translation->name) !!}
+                                        @endforeach
 
                                         <button type="button" class="btn mb-3" data-toggle="collapse"
                                             aria-expanded="true" aria-controls="collapse-{{ $i }}"
                                             data-target="#collapse-{{ $i }}">
                                             <i class="{{ $permission->icon }}" aria-hidden="true"></i>
-                                            {{ $permission->km }} - {{ $permission->en }}
+                                            {{ $permission->translation()->name }}
                                         </button>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input"
