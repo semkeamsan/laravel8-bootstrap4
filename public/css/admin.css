@@ -15363,10 +15363,6 @@ a.text-darker:hover {
     margin-left: -1rem
 }
 
-.badge {
-    /* text-transform: uppercase */
-}
-
 .badge a {
     color: var(--white)
 }
