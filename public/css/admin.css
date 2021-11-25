@@ -1,61 +1,18 @@
 @charset 'UTF-8';
-/* @import url(//fonts.googleapis.com/css?family=Battambang&display=swap&subset=khmer); */
+@import url(color.css);
 
 @font-face {
     font-family: "Battambang";
     src: url("../fonts/khmer/KhmerOS_battambang.ttf");
 }
+
 /*!
-
 =========================================================
-* Argon Dashboard PRO - v1.2.0
+* Admin Dashboard PRO - v2.0
 =========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-:root {
-    --blue: #5e72e4;
-    --indigo: #5603ad;
-    --purple: #8965e0;
-    --pink: #D70F64;
-    --red: #f5365c;
-    --orange: #fb6340;
-    --yellow: #ffd600;
-    --green: #187305;
-    --teal: #11cdef;
-    --cyan: #2bffc6;
-    --gray: #8898aa;
-    --gray-dark: #32325d;
-    --light: #ced4da;
-    --lighter: #e9ecef;
-    --primary: var(--pink);
-    --secondary: #f7fafc;
-    --success: #187305;
-    --info: #11cdef;
-    --warning: #fb6340;
-    --danger: #f5365c;
-    --light: #adb5bd;
-    --dark: #212529;
-    --default: #172b4d;
-    --white: #fff;
-    --neutral: var(--white);
-    --darker: black;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-    --font-family-sans-serif: Open Sans, sans-serif;
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace
-}
+
 
 *,
 ::after,
@@ -64,7 +21,7 @@
 }
 
 * {
-    font-family: Battambang,sans-serif;
+    font-family: Battambang, sans-serif;
     /* -webkit-touch-callout: none;
       -webkit-user-select     : none;
       -khtml-user-select      : none;
@@ -2586,7 +2543,7 @@ textarea.form-control {
 
 .custom-control-input.is-valid:checked~.custom-control-label::before,
 .was-validated .custom-control-input:valid:checked~.custom-control-label::before {
-    border-color:var(--primary);
+    border-color: var(--primary);
     background-color: var(--primary)
 }
 
@@ -2904,7 +2861,7 @@ fieldset:disabled a.btn {
 .show>.btn-primary.dropdown-toggle {
     color: var(--white);
     border-color: var(--primary);
-    background-color:var(--primary);
+    background-color: var(--primary);
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -16675,6 +16632,7 @@ a.btn-icon-only {
 .custom-radio .custom-control-input:checked~.custom-control-label::before {
     border-color: var(--primary)
 }
+
 .custom-radio .custom-control-input:disabled~.custom-control-label::before {
     border-color: #e9ecef
 }
@@ -17374,7 +17332,8 @@ textarea[resize=horizontal] {
 
 .form-primary .form-control {
     color: var(--white);
-    border-color: var(--primary);;
+    border-color: var(--primary);
+    ;
     background-color: rgba(50, 76, 221, .5)
 }
 
@@ -17555,7 +17514,7 @@ textarea[resize=horizontal] {
 }
 
 .icon-xs+.icon-text {
-    width: calc(100% -  1)
+    width: calc(100% - 1)
 }
 
 .icon-actions>a {
@@ -18543,7 +18502,8 @@ textarea[resize=horizontal] {
     position: relative
 }
 
-.navbar-vertical .navbar-nav .nav-link>i,.navbar-vertical .navbar-nav .nav-link>svg {
+.navbar-vertical .navbar-nav .nav-link>i,
+.navbar-vertical .navbar-nav .nav-link>svg {
     font-size: .9375rem;
     line-height: 1.5rem;
     min-width: 2rem
@@ -18592,15 +18552,16 @@ textarea[resize=horizontal] {
     color: var(--success)
 }
 
-.navbar-nav .nav-item .collapse  .active{
-    background :#f6f9fc;
+.navbar-nav .nav-item .collapse .active {
+    background: #f6f9fc;
 }
 
-.nav-child{
-    padding-left : 2.5rem;
+.nav-child {
+    padding-left: 2.5rem;
 }
-.g-sidenav-hidden .nav-child{
-    padding-left : .5rem;
+
+.g-sidenav-hidden .nav-child {
+    padding-left: .5rem;
 }
 
 .navbar-vertical .navbar-nav .nav .nav-link {
@@ -25139,6 +25100,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .select2.select2-container {
     width: calc(100%) !important;
 }
+
 .input-group .select2.select2-container {
     width: calc(100% - 42px) !important;
 }

@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/@fontawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     {{-- <script src="https://themes.3rdwavemedia.com/demo/bs5/orbit/assets/fontawesome/js/all.min.js"></script> --}}
     @stack('styles-link')
-    <!-- Argon CSS -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}" type="text/css">
     {{-- Custom Styles --}}
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css">
     @stack('styles')
@@ -50,7 +49,7 @@
     <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     @stack('scripts-src')
     <!-- Argon JS -->
-    <script src="{{ asset('js/argon.min.js?v=1.2.0') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
     {{-- Custom Scripts --}}
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>

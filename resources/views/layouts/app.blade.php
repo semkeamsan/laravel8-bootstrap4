@@ -11,7 +11,7 @@
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('vendor/@fontawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}" type="text/css">
     @stack('styles')
 </head>
 
