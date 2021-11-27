@@ -6395,7 +6395,7 @@ a.badge:hover {
     z-index: 2;
     color: var(--white);
     border-color: var(--primary);
-    background-color: var(--success)
+    background-color: var(--primary)
 }
 
 .list-group-item+.list-group-item {
