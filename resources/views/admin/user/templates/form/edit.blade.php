@@ -169,7 +169,7 @@
                                 @foreach ($roles as $role)
                                     <option {{ $role->id != old('role_id', $user->role_id) ?: 'selected=selected' }}
                                         value="{{ $role->id }}">
-                                        {{ $role->km }} - {{ $role->en }}
+                                        {{ $role->translation()->name }}
                                     </option>
                                 @endforeach
                             </select>
